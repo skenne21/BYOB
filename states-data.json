@@ -1,227 +1,171 @@
 {
  "states": [
   {
-   "id": "anch_6",
    "name": "Alabama"
   },
   {
-   "id": "anch_7",
    "name": "Alaska"
   },
   {
-   "id": "anch_8",
    "name": "American Samoa"
   },
   {
-   "id": "anch_9",
    "name": "Arizona"
   },
   {
-   "id": "anch_10",
    "name": "Arkansas"
   },
   {
-   "id": "anch_11",
    "name": "California"
   },
   {
-   "id": "anch_12",
    "name": "Colorado"
   },
   {
-   "id": "anch_13",
    "name": "Connecticut"
   },
   {
-   "id": "anch_14",
    "name": "Delaware"
   },
   {
-   "id": "anch_15",
    "name": "District of Columbia"
   },
   {
-   "id": "anch_16",
    "name": "Florida"
   },
   {
-   "id": "anch_17",
    "name": "Georgia"
   },
   {
-   "id": "anch_18",
    "name": "Guam"
   },
   {
-   "id": "anch_19",
    "name": "Hawaii"
   },
   {
-   "id": "anch_20",
    "name": "Idaho"
   },
   {
-   "id": "anch_21",
    "name": "Illinois"
   },
   {
-   "id": "anch_22",
    "name": "Indiana"
   },
   {
-   "id": "anch_23",
    "name": "Iowa"
   },
   {
-   "id": "anch_24",
    "name": "Kansas"
   },
   {
-   "id": "anch_25",
    "name": "Kentucky"
   },
   {
-   "id": "anch_26",
    "name": "Louisiana"
   },
   {
-   "id": "anch_27",
    "name": "Maine"
   },
   {
-   "id": "anch_28",
    "name": "Maryland"
   },
   {
-   "id": "anch_29",
    "name": "Massachusetts"
   },
   {
-   "id": "anch_30",
    "name": "Michigan"
   },
   {
-   "id": "anch_31",
    "name": "Minnesota"
   },
   {
-   "id": "anch_32",
    "name": "Mississippi"
   },
   {
-   "id": "anch_33",
    "name": "Missouri"
   },
   {
-   "id": "anch_34",
    "name": "Montana"
   },
   {
-   "id": "anch_35",
    "name": "Nebraska"
   },
   {
-   "id": "anch_36",
    "name": "Nevada"
   },
   {
-   "id": "anch_37",
    "name": "New Hampshire"
   },
   {
-   "id": "anch_38",
    "name": "New Jersey"
   },
   {
-   "id": "anch_39",
    "name": "New Mexico"
   },
   {
-   "id": "anch_40",
    "name": "New York"
   },
   {
-   "id": "anch_41",
    "name": "North Carolina"
   },
   {
-   "id": "anch_42",
    "name": "North Dakota"
   },
   {
-   "id": "anch_43",
    "name": "Northern Mariana Islands"
   },
   {
-   "id": "anch_44",
    "name": "Ohio"
   },
   {
-   "id": "anch_45",
    "name": "Oklahoma"
   },
   {
-   "id": "anch_46",
    "name": "Oregon"
   },
   {
-   "id": "anch_47",
    "name": "Pennsylvania"
   },
   {
-   "id": "anch_48",
    "name": "Puerto Rico"
   },
   {
-   "id": "anch_49",
    "name": "Rhode Island"
   },
   {
-   "id": "anch_50",
    "name": "South Carolina"
   },
   {
-   "id": "anch_51",
    "name": "South Dakota"
   },
   {
-   "id": "anch_52",
    "name": "Tennessee"
   },
   {
-   "id": "anch_53",
    "name": "Texas"
   },
   {
-   "id": "anch_54",
    "name": "Utah"
   },
   {
-   "id": "anch_55",
    "name": "Vermont"
   },
   {
-   "id": "anch_56",
    "name": "Virgin Islands"
   },
   {
-   "id": "anch_57",
    "name": "Virginia"
   },
   {
-   "id": "anch_58",
    "name": "Washington"
   },
   {
-   "id": "anch_59",
    "name": "West Virginia"
   },
   {
-   "id": "anch_60",
    "name": "Wisconsin"
   },
   {
-   "id": "anch_61",
    "name": "Wyoming"
   }
  ]
