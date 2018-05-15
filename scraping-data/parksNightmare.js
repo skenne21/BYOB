@@ -26,8 +26,8 @@ nightmareParksData
   .end()
   .then( results => {
     console.log(results)
-    let parks = JSON.stringify(results, null, " ")
-    fs.writeFile('./parks-data.json', parks, "utf8", err => {
+    let parks = JSON.stringify({parks:results}, null, " ")
+    fs.writeFile('./scraping-data/parks-data.json', parks, "utf8", err => {
       if( err) {
         throw new Error('nope')
       }

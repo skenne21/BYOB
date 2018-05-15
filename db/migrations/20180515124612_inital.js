@@ -15,7 +15,7 @@ exports.up = function(knex, Promise) {
       table.string('date_open');
       table.string('latLong');
       table.string('location');
-      table.string('summary');
+      table.text('summary');
       table.integer('state_id').unsigned();
       table.foreign('state_id').references('states.id')
 
