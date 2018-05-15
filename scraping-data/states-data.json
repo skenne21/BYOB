@@ -1,301 +1,301 @@
 [
  {
   "abbr": "AL",
-  "capital": "Montgomery",
+  "capitol": "Montgomery",
   "name": "Alabama",
   "stateHood": "December 14, 1819"
  },
  {
   "abbr": "AK",
-  "capital": "Juneau",
+  "capitol": "Juneau",
   "name": "Alaska",
   "stateHood": "January 3, 1959"
  },
  {
   "abbr": "AZ",
-  "capital": "Phoenix",
+  "capitol": "Phoenix",
   "name": "Arizona",
   "stateHood": "February 14, 1912"
  },
  {
   "abbr": "AR",
-  "capital": "Little Rock",
+  "capitol": "Little Rock",
   "name": "Arkansas",
   "stateHood": "June 15, 1836"
  },
  {
   "abbr": "CA",
-  "capital": "Sacramento",
+  "capitol": "Sacramento",
   "name": "California",
   "stateHood": "September 9, 1850"
  },
  {
   "abbr": "CO",
-  "capital": "Denver",
+  "capitol": "Denver",
   "name": "Colorado",
   "stateHood": "August 1, 1876"
  },
  {
   "abbr": "CT",
-  "capital": "Hartford",
+  "capitol": "Hartford",
   "name": "Connecticut",
   "stateHood": "January 9, 1788"
  },
  {
   "abbr": "DE",
-  "capital": "Dover",
+  "capitol": "Dover",
   "name": "Delaware",
   "stateHood": "December 7, 1787"
  },
  {
   "abbr": "FL",
-  "capital": "Tallahassee",
+  "capitol": "Tallahassee",
   "name": "Florida",
   "stateHood": "March 3, 1845"
  },
  {
   "abbr": "GA",
-  "capital": "Atlanta",
+  "capitol": "Atlanta",
   "name": "Georgia",
   "stateHood": "January 2, 1788"
  },
  {
   "abbr": "HI",
-  "capital": "Honolulu",
+  "capitol": "Honolulu",
   "name": "Hawaii",
   "stateHood": "August 21, 1959"
  },
  {
   "abbr": "ID",
-  "capital": "Boise",
+  "capitol": "Boise",
   "name": "Idaho",
   "stateHood": "July 3, 1890"
  },
  {
   "abbr": "IL",
-  "capital": "Springfield",
+  "capitol": "Springfield",
   "name": "Illinois",
   "stateHood": "December 3, 1818"
  },
  {
   "abbr": "IN",
-  "capital": "Indianapolis",
+  "capitol": "Indianapolis",
   "name": "Indiana",
   "stateHood": "December 11, 1816"
  },
  {
   "abbr": "IA",
-  "capital": "Des Moines",
+  "capitol": "Des Moines",
   "name": "Iowa",
   "stateHood": "December 28, 1846"
  },
  {
   "abbr": "KS",
-  "capital": "Topeka",
+  "capitol": "Topeka",
   "name": "Kansas",
   "stateHood": "January 29, 1861"
  },
  {
   "abbr": "KY",
-  "capital": "Frankfort",
+  "capitol": "Frankfort",
   "name": "Kentucky",
   "stateHood": "June 1, 1792"
  },
  {
   "abbr": "LA",
-  "capital": "Baton Rouge",
+  "capitol": "Baton Rouge",
   "name": "Louisiana",
   "stateHood": "April 30, 1812"
  },
  {
   "abbr": "ME",
-  "capital": "Augusta",
+  "capitol": "Augusta",
   "name": "Maine",
   "stateHood": "March 15, 1820"
  },
  {
   "abbr": "MD",
-  "capital": "Annapolis",
+  "capitol": "Annapolis",
   "name": "Maryland",
   "stateHood": "April 28, 1788"
  },
  {
   "abbr": "MA",
-  "capital": "Boston",
+  "capitol": "Boston",
   "name": "Massachusetts",
   "stateHood": "February 6, 1788"
  },
  {
   "abbr": "MI",
-  "capital": "Lansing",
+  "capitol": "Lansing",
   "name": "Michigan",
   "stateHood": "January 26, 1837"
  },
  {
   "abbr": "MN",
-  "capital": "Saint Paul",
+  "capitol": "Saint Paul",
   "name": "Minnesota",
   "stateHood": "May 11, 1858"
  },
  {
   "abbr": "MS",
-  "capital": "Jackson",
+  "capitol": "Jackson",
   "name": "Mississippi",
   "stateHood": "December 10, 1817"
  },
  {
   "abbr": "MO",
-  "capital": "Jefferson City",
+  "capitol": "Jefferson City",
   "name": "Missouri",
   "stateHood": "August 10, 1821"
  },
  {
   "abbr": "MT",
-  "capital": "Helena",
+  "capitol": "Helena",
   "name": "Montana",
   "stateHood": "November 8, 1889"
  },
  {
   "abbr": "NE",
-  "capital": "Lincoln",
+  "capitol": "Lincoln",
   "name": "Nebraska",
   "stateHood": "March 1, 1867"
  },
  {
   "abbr": "NV",
-  "capital": "Carson City",
+  "capitol": "Carson City",
   "name": "Nevada",
   "stateHood": "October 31, 1864"
  },
  {
   "abbr": "NH",
-  "capital": "Concord",
+  "capitol": "Concord",
   "name": "New Hampshire",
   "stateHood": "June 21, 1788"
  },
  {
   "abbr": "NJ",
-  "capital": "Trenton",
+  "capitol": "Trenton",
   "name": "New Jersey",
   "stateHood": "December 18, 1787"
  },
  {
   "abbr": "NM",
-  "capital": "Santa Fe",
+  "capitol": "Santa Fe",
   "name": "New Mexico",
   "stateHood": "January 6, 1912"
  },
  {
   "abbr": "NY",
-  "capital": "Albany",
+  "capitol": "Albany",
   "name": "New York",
   "stateHood": "July 26, 1788"
  },
  {
   "abbr": "NC",
-  "capital": "Raleigh",
+  "capitol": "Raleigh",
   "name": "North Carolina",
   "stateHood": "November 21, 1789"
  },
  {
   "abbr": "ND",
-  "capital": "Bismarck",
+  "capitol": "Bismarck",
   "name": "North Dakota",
   "stateHood": "November 2, 1889"
  },
  {
   "abbr": "OH",
-  "capital": "Columbus",
+  "capitol": "Columbus",
   "name": "Ohio",
   "stateHood": "March 1, 1803"
  },
  {
   "abbr": "OK",
-  "capital": "Oklahoma City",
+  "capitol": "Oklahoma City",
   "name": "Oklahoma",
   "stateHood": "November 16, 1907"
  },
  {
   "abbr": "OR",
-  "capital": "Salem",
+  "capitol": "Salem",
   "name": "Oregon",
   "stateHood": "February 14, 1859"
  },
  {
   "abbr": "PA",
-  "capital": "Harrisburg",
+  "capitol": "Harrisburg",
   "name": "Pennsylvania",
   "stateHood": "December 12, 1787"
  },
  {
   "abbr": "RI",
-  "capital": "Providence",
+  "capitol": "Providence",
   "name": "Rhode Island",
   "stateHood": "May 19, 1790"
  },
  {
   "abbr": "SC",
-  "capital": "Columbia",
+  "capitol": "Columbia",
   "name": "South Carolina",
   "stateHood": "May 23, 1788"
  },
  {
   "abbr": "SD",
-  "capital": "Pierre",
+  "capitol": "Pierre",
   "name": "South Dakota",
   "stateHood": "November 2, 1889"
  },
  {
   "abbr": "TN",
-  "capital": "Nashville",
+  "capitol": "Nashville",
   "name": "Tennessee",
   "stateHood": "June 1, 1796"
  },
  {
   "abbr": "TX",
-  "capital": "Austin",
+  "capitol": "Austin",
   "name": "Texas",
   "stateHood": "December 29, 1845"
  },
  {
   "abbr": "UT",
-  "capital": "Salt Lake City",
+  "capitol": "Salt Lake City",
   "name": "Utah",
   "stateHood": "January 4, 1896"
  },
  {
   "abbr": "VT",
-  "capital": "Montpelier",
+  "capitol": "Montpelier",
   "name": "Vermont",
   "stateHood": "March 4, 1791"
  },
  {
   "abbr": "VA",
-  "capital": "Richmond",
+  "capitol": "Richmond",
   "name": "Virginia",
   "stateHood": "June 25, 1788"
  },
  {
   "abbr": "WA",
-  "capital": "Olympia",
+  "capitol": "Olympia",
   "name": "Washington",
   "stateHood": "November 11, 1889"
  },
  {
   "abbr": "WV",
-  "capital": "Charleston",
+  "capitol": "Charleston",
   "name": "West Virginia",
   "stateHood": "June 20, 1863"
  },
  {
   "abbr": "WI",
-  "capital": "Madison",
+  "capitol": "Madison",
   "name": "Wisconsin",
   "stateHood": "May 29, 1848"
  },
  {
   "abbr": "WY",
-  "capital": "Cheyenne",
+  "capitol": "Cheyenne",
   "name": "Wyoming",
   "stateHood": "July 10, 1890"
  }

@@ -10,7 +10,7 @@ nightmareStateData
       const results = element.innerText.split('\t');
 
       return {
-        capitol: results[3],
+        capital: results[3],
         name: results[2],
         stateHood: results[4],
         abbr: results[1]
