@@ -3,20 +3,25 @@ const nightmareStateData = Nightmare({ show: true });
 const fs = require('fs');
 
 nightmareStateData
-  .goto('https://www.nps.gov')
-  .click('button.SearchBar-keywordSearch')
+  .goto('https://simple.wikipedia.org/wiki/List_of_U.S._states')
   .wait(5000)
   .evaluate(() => {
-    let states = [...document.querySelectorAll('ul.dropdown-menu li a')].map( element => {
-      return { 
-        name: `${element.innerText}`
+    let states = [...document.querySelectorAll('table.wikitable tbody tr')].map( element => {
+      const results = element.innerText.split('\t');
+
+      return {
+        capitol: results[3],
+        name: results[2],
+        stateHood: results[4],
+        abbr: results[1]
       }
     })
     return states
   })
   .end()
   .then(results => {
-    let states = JSON.stringify({ states: results }, null, ' ')
+    console.log(results)
+    let states = JSON.stringify(results, null, ' ')
     fs.writeFile('./states-data.json', states, 'utf8', err => {
       if (err) {
         console.log('fs', err)
@@ -33,5 +38,3 @@ nightmareStateData
 //   .evaluate(() => {
 //     let states = [...document.querySelectorAll('table.wikitable')]
 //   })
-
-
