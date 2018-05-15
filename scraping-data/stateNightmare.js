@@ -10,10 +10,10 @@ nightmareStateData
       const results = element.innerText.split('\t');
 
       return {
-        capitol: results[3],
+        capital: results[3],
         name: results[2],
         stateHood: results[4],
-        abbr: results[1]
+        abbv: results[1]
       }
     })
     return states
@@ -21,8 +21,8 @@ nightmareStateData
   .end()
   .then(results => {
     console.log(results)
-    let states = JSON.stringify(results, null, ' ')
-    fs.writeFile('./states-data.json', states, 'utf8', err => {
+    let states = JSON.stringify({states:results}, null, ' ')
+    fs.writeFile('./scraping-data/states-data.json', states, 'utf8', err => {
       if (err) {
         console.log('fs', err)
         throw new Error('nope')
