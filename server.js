@@ -75,7 +75,6 @@ app.get('/api/v1/parks/:id', (request, response) => {
 app.get('/api/v1/states/:id/parks', (request, response) => {
   database('parks').where('state_id', request.params.id).select()
     .then(parks => {
-      console.log(parks)
       if (parks.length) {
         response.status(200).json(parks)
       } else {
