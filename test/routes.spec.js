@@ -350,4 +350,86 @@ describe('API-routes', () => {
         })
     })
   })
+
+  describe('PUT /api/v1/states/:id', () => {
+    it('should modify a single state by id', () => {
+      return chai.request(server)
+        .put('/api/v1/states/1')
+        .send({
+          name: 'frankiebeans',
+          abbv: 'PA',
+          capital: 'Oranguatangs',
+          stateHood: 'tomorrow'
+        })
+        .then(response => {
+          response.should.have.status(201);
+          response.body.should.be.a('object');
+          response.body.should.have.property('id');
+          response.body.id.should.equal(1)
+        })
+        .catch(error => {
+          throw error
+        })
+    })
+
+    it('should send 422 if missing req params', () => {
+      return chai.request(server)
+        .put('/api/v1/states/1')
+        .send({
+          name: 'frankiebeans',
+          abbv: 'PA',
+          capital: 'Oranguatangs',
+        })
+        .then( response => {
+          response.should.have.status(422);
+          response.body.should.be.a('object');
+          response.body.error.should.equal('Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You\'re missing a "stateHood" property.')
+        })
+        .catch(error => {
+          throw error;
+        })
+    })
+  })
+
+  describe('PUT /api/v1/parks/:id', () => {
+    it('should replace a single park by id', () => {
+      return chai.request(server)
+      .put('/api/v1/parks/1')
+      .send({
+        name: 'tacotown',
+        location: 'BA',
+        date_open: 'Monkeys',
+        latLong: 'yesterday',
+        summary: 'yup'
+      })
+      .then( response => {
+        response.should.have.status(201);
+        response.body.should.be.a('object');
+        response.body.should.have.property('id');
+        response.body.id.should.equal(1)
+      })
+      .catch(error => {
+        throw error;
+      })
+    })
+
+    it('should send 422 if missing req params', () => {
+      return chai.request(server)
+        .put('/api/v1/parks/1')
+        .send({
+          name: 'tacotown',
+          location: 'BA',
+          date_open: 'Monkeys',
+          latLong: 'yesterday',
+        })
+        .then( response => {
+          response.should.have.status(422);
+          response.body.should.be.a('object');
+          response.body.error.should.equal(`Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You\'re missing a "summary" property.`)
+        })
+        .catch(error => {
+          throw error;
+        })
+      })
+  })
 })

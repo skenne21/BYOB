@@ -181,7 +181,7 @@ app.put('/api/v1/states/:id', (request, response) => {
   database('states').where('id', request.params.id).update(state, 'id')
     .then( id => {
       if (id.length) {
-        response.status(201).json({ id })
+        response.status(201).json({ id: id[0] })
       } else {
         response.status(404).json({
           error: `the state with the id ${request.params.id} was not found`
@@ -201,8 +201,7 @@ app.put('/api/v1/parks/:id', (request, response) => {
       return response
         .status(422)
         .send({
-            error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a
-            "${requiredParameter}" property.`
+            error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -210,7 +209,7 @@ app.put('/api/v1/parks/:id', (request, response) => {
   database('parks').where('id', request.params.id).update(park, 'id')
     .then( id => {
       if (id.length) {
-        response.status(201).json({ id })
+        response.status(201).json({ id: id[0] })
       } else {
         response.status(404).json({
           error: `the state with the id ${request.params.id} was not found`
