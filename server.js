@@ -10,6 +10,8 @@ app.set('port', process.env.PORT || 3000);
 
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.locals.title = 'parkFinder';
@@ -94,8 +96,8 @@ app.post('/api/v1/states', (request, response) => {
     if (!state[requiredParameter]) {
       return response
         .status(422)
-        .send({ 
-            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.` 
+        .send({
+            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -116,8 +118,8 @@ app.post('/api/v1/parks', (request, response) => {
     if (!park[requiredParameter]) {
       return response
         .status(422)
-        .send({ 
-            error: `Expected format: { name: <String>, location: <String>, date_open: <String>, latLong: <String>, summary: <String>, state_id: <String> }. You're missing a "${requiredParameter}" property.` 
+        .send({
+            error: `Expected format: { name: <String>, location: <String>, date_open: <String>, latLong: <String>, summary: <String>, state_id: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -136,7 +138,7 @@ app.delete('/api/v1/states/:id', (request, response) => {
   database('states').where('id', request.params.id).del()
     .then( id => {
       if (id) {
-        response.status(204).json({ id })  
+        response.status(204).json({ id })
       } else {
         response.status(404).json({
           error: `Could not find state with id ${request.params.id}`
@@ -152,7 +154,7 @@ app.delete('/api/v1/parks/:id', (request, response) => {
   database('parks').where('id', request.params.id).del()
     .then( id => {
       if (id) {
-        response.status(204).json({ id })  
+        response.status(204).json({ id })
       } else {
         response.status(404).json({
           error: `Could not find state with id ${request.params.id}`
@@ -171,8 +173,8 @@ app.put('/api/v1/states/:id', (request, response) => {
     if (!state[requiredParameter]) {
       return response
         .status(422)
-        .send({ 
-            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.` 
+        .send({
+            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -199,9 +201,9 @@ app.put('/api/v1/parks/:id', (request, response) => {
     if (!park[requiredParameter]) {
       return response
         .status(422)
-        .send({ 
-            error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a 
-            "${requiredParameter}" property.` 
+        .send({
+            error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a
+            "${requiredParameter}" property.`
         });
     }
   }
@@ -224,3 +226,5 @@ app.put('/api/v1/parks/:id', (request, response) => {
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on port ${app.get('port')}`)
 })
+
+module.exports = app;
