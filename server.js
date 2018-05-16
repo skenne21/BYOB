@@ -87,17 +87,139 @@ app.get('/api/v1/states/:id/parks', (request, response) => {
     })
 });
 
-// app.post('/api/v1/projects/:id/palettes', (request, response) => {
-//   const palette = request.body;
-//   debugger
-//   database('palettes').insert({...palette, project_id: request.params.id}, 'id')
-//     .then(palette => {
-//       response.status(201).json({ id: palette[0] })
-//     })
-//     .catch(error => {
-//       response.status(500).json({ error })
-//     })
-// });
+app.post('/api/v1/states', (request, response) => {
+  const state = request.body;
+
+  for (let requiredParameter of ['name', 'abbv', 'capital', 'stateHood']) {
+    if (!state[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ 
+            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.` 
+        });
+    }
+  }
+
+  database('states').insert(state, 'id')
+    .then( state => {
+      response.status(201).json({ id: state[0] })
+    })
+    .catch( error => {
+      response.status(500).json({error})
+    })
+});
+
+app.post('/api/v1/parks', (request, response) => {
+  const park = request.body;
+
+  for (let requiredParameter of ['name', 'location', 'date_open', 'latLong', 'summary', 'state_id']) {
+    if (!park[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ 
+            error: `Expected format: { name: <String>, location: <String>, date_open: <String>, latLong: <String>, summary: <String>, state_id: <String> }. You're missing a "${requiredParameter}" property.` 
+        });
+    }
+  }
+
+  database('parks').insert(park, 'id')
+    .then( park => {
+      response.status(201).json({id: park[0]})
+    })
+    .catch( error => {
+      response.status(500).json({error})
+    })
+
+})
+
+app.delete('/api/v1/states/:id', (request, response) => {
+  database('states').where('id', request.params.id).del()
+    .then( id => {
+      if (id) {
+        response.status(204).json({ id })  
+      } else {
+        response.status(404).json({
+          error: `Could not find state with id ${request.params.id}`
+        })
+      }
+    })
+    .catch( error => {
+      response.status(500).json({error})
+    })
+})
+
+app.delete('/api/v1/parks/:id', (request, response) => {
+  database('parks').where('id', request.params.id).del()
+    .then( id => {
+      if (id) {
+        response.status(204).json({ id })  
+      } else {
+        response.status(404).json({
+          error: `Could not find state with id ${request.params.id}`
+        })
+      }
+    })
+    .catch( error => {
+      response.status(500).json({error})
+    })
+})
+
+app.put('/api/v1/states/:id', (request, response) => {
+  const state = request.body;
+
+  for (let requiredParameter of ['name', 'abbv', 'capital', 'stateHood']) {
+    if (!state[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ 
+            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.` 
+        });
+    }
+  }
+
+  database('states').where('id', request.params.id).update(state, 'id')
+    .then( id => {
+      if (id.length) {
+        response.status(201).json({ id })
+      } else {
+        response.status(404).json({
+          error: `the state with the id ${request.params.id} was not found`
+        })
+      }
+    })
+    .catch( error => {
+      response.status(500).json({ error })
+    })
+})
+
+app.put('/api/v1/parks/:id', (request, response) => {
+  const park = request.body;
+
+  for (let requiredParameter of ['name', 'date_open', 'latLong', 'location', 'summary']) {
+    if (!park[requiredParameter]) {
+      return response
+        .status(422)
+        .send({ 
+            error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a 
+            "${requiredParameter}" property.` 
+        });
+    }
+  }
+
+  database('parks').where('id', request.params.id).update(park, 'id')
+    .then( id => {
+      if (id.length) {
+        response.status(201).json({ id })
+      } else {
+        response.status(404).json({
+          error: `the state with the id ${request.params.id} was not found`
+        })
+      }
+    })
+    .catch( error => {
+      response.status(500).json({ error })
+    })
+})
 
 app.listen(app.get('port'), () => {
   console.log(`${app.locals.title} is running on port ${app.get('port')}`)
