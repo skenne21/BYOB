@@ -182,25 +182,25 @@ describe('API-routes', () => {
   describe('GET /api/v1/parks/:id', () => {
     it('should return a park by id', () => {
       return chai.request(server)
-        .get(`/api/v1/parks/1?token=${token}`)
+        .get(`/api/v1/parks/12?token=${token}`)
         .then( response => {
           response.should.have.status(200);
           response.should.be.json;
           response.body.should.be.an('array');
           response.body[0].should.have.property('id');
-          response.body[0].id.should.equal(1);
+          response.body[0].id.should.equal(12);
           response.body[0].should.have.property('name');
-          response.body[0].name.should.equal('Acadia');
+          response.body[0].name.should.equal('Congaree ');
           response.body[0].should.have.property('date_open');
-          response.body[0].date_open.should.equal('February 26, 1919');
+          response.body[0].date_open.should.equal('November 10, 2003');
           response.body[0].should.have.property('latLong');
-          response.body[0].latLong.should.equal('44.35°N 68.21°W');
+          response.body[0].latLong.should.equal('33.78°N 80.78°W');
           response.body[0].should.have.property('location');
-          response.body[0].location.should.equal('Maine');
+          response.body[0].location.should.equal('South Carolina');
           response.body[0].should.have.property('summary');
-          response.body[0].summary.should.equal(`Covering most of Mount Desert Island and other coastal islands, Acadia features the tallest mountain on the Atlantic coast of the United States, granite peaks, ocean shoreline, woodlands, and lakes. There are freshwater, estuary, forest, and intertidal habitats.`);
+          response.body[0].summary.should.equal(`On the Congaree River, this park is the largest portion of old-growth floodplain forest left in North America. Some of the trees are the tallest in the eastern United States. An elevated walkway called the Boardwalk Loop guides visitors through the swamp. (BR)`);
           response.body[0].should.have.property('state_id');
-          response.body[0].state_id.should.equal(19);
+          response.body[0].state_id.should.equal(40);
         })
         .catch(error => {
           throw error;
