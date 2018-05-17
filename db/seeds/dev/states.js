@@ -11,8 +11,10 @@ exports.seed = function(knex, Promise) {
     })
     .then(() => {
       let parksPromises = [];
+
       parksData.parks.forEach( park => {
         let state = park.location;
+
         parksPromises.push(createParks(knex, park, state))
       })
       return Promise.all(parksPromises)
