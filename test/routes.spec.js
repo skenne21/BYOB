@@ -72,6 +72,43 @@ describe('API-routes', () => {
             throw error;
           })
       })
+
+      it('should get a state with an abbv', () => {
+        return chai.request(server)
+          .get('/api/v1/states?abbv=CO')
+          .then( response => {
+            response.should.be.json;
+            response.should.have.status(200);
+            response.body.should.be.a('object');
+            response.body.should.have.property('id');
+            response.body.id.should.equal(6);
+            response.body.should.have.property('name');
+            response.body.name.should.equal('Colorado');
+            response.body.should.have.property('abbv');
+            response.body.abbv.should.equal('CO');
+            response.body.should.have.property('capital');
+            response.body.capital.should.equal('Denver');
+            response.body.should.have.property('stateHood');
+            response.body.stateHood.should.equal('August 1, 1876')
+          })
+          .catch( error => {
+            throw error
+          })
+      })
+
+      it('should send a 422 status if the state Abbv does not exist', () => {
+        return chai.request(server)
+        .get('/api/v1/states?abbv=C')
+        .then( response => {
+          response.should.be.json;
+          response.should.have.status(422);
+          response.body.should.be.a('object');
+          response.body.error.should.equal('States not Found with abbv of C')
+        })
+        .catch( error => {
+          throw error
+        })
+      })
     });
 
     describe('GET /api/v1/parks', () => {
