@@ -2,6 +2,7 @@ const submitButton = document.querySelector('button');
 
 
 const fetchToken = async (e) => {
+  e.preventDefault();
   const inputs = document.querySelectorAll('input');
   const body = {
     email: inputs[0].value,
@@ -25,9 +26,9 @@ const fetchToken = async (e) => {
 }
 
 const showToken = token => {
-  console.log(token)
   const parent = document.querySelector('section');
   const child = document.createElement('article');
+  child.setAttribute('class', 'token')
   child.innerHTML = `<h2>Your token is: token:${token.token}</h2>`;
   parent.appendChild(child);
 }

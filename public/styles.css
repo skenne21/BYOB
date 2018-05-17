@@ -1,0 +1,53 @@
+body {
+  height: 100vh;
+  margin: 0;
+  background-color: #76847B;
+} 
+
+.sign-in {
+  color: #2D1910;
+  border: 2px solid black;
+  width: 50%;
+  margin: 2em auto;
+  height: 500px;
+  background-color: #A87C50;
+} 
+
+.sign-in h1,
+.sign-in p {
+  padding: 1em;
+  text-align: center;
+} 
+
+.sign-in input {
+  font-size: 1.3em;
+  margin: 20px;
+  display: inline-block;
+  width: 95%;
+  height: 2em;
+  left-padding: 20px;
+} 
+
+.sign-in button {
+  border: 2px solid black;
+  color: #2D1910;
+  position: relative;
+  left: 35%;
+  background-color: #AA8783;
+  width: 30%;
+  font-size: 1em;
+  height: 3em;
+}
+
+.token_parnet {
+  width: 50%;
+  margin: 2em auto;
+}
+
+.token {
+  height: 100%;
+}
+
+.token h1 {
+  text-align: left;
+}
