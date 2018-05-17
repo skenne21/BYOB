@@ -41,13 +41,13 @@ describe('API-routes', () => {
     adminToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InR1cmluZ0B0dXJpbmcuaW8iLCJhcHBOYW1lIjoiYmF0cyIsImFkbWluIjoidHVyaW5nQHR1cmluZy5pbyIsImlhdCI6MTUyNjU5Mjg0NSwiZXhwIjoxNTI2NzY1NjQ1fQ.js2N3AgO49xEMgbGMkMK4Ys4D9Js-8jSy6mpfk7UNDo'
     database.migrate.rollback()
       .then(() => {
-        database.migrate.latest()
-          .then(() => {
-            return database.seed.run()
-              .then(() => {
-                done()
-              })
-          })
+        return database.migrate.latest()
+      })
+      .then(() => {
+        return database.seed.run()
+      })
+      .then(() => {
+        done()
       })
   });
 
@@ -261,6 +261,8 @@ describe('API-routes', () => {
     })
   })
 
+
+  
   describe('POST /api/v1/states', () => {
     it('should post a new new state to the database', () => {
       return chai.request(server)
