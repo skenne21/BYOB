@@ -1,12 +1,18 @@
 language: node_js
 node_js:
-  - "node"
+- node
 services:
-  - postgresql
+- postgresql
 before_script:
- - psql -c 'create database parks_test;' -U postgres
+- psql -c 'create database parks_test;' -U postgres
 test:
- adapter: postgresql
- database: parks_test
+  adapter: postgresql
+  database: parks_test
 env:
-  - DB=DB_SECRETKEY=taco
+- DB=DB_SECRETKEY=taco
+deploy:
+  provider: heroku
+  api_key:
+    secure: OaWNv+Y2j71/EgVldpqAfgfjlhjr1pKqBvbwKss3cLfRvfMzpSz7qeYwPK3Gmy9XtW8j/uMWWHnIu0MQeSYcXoJEKqXlWKO/zJxGtYHtCQLGZbDQn1srkMcHeaacdOcNdMMATao3OYDrlFW4lq16wWogQIqYm128r0MnK9uoTMMrPfZjbWK9N4cOMNv9pftjK/mW2N53EjegLXB9KFn3hIqv3ztxornA7R/TRe31O4vD8uRc18TmJIHIgb0fQm/UM5mMHkIrU4PU/ptfNAK6UwrIWVVumDZ/SO1zP278mFTmnHTk+Ls6NoWZue5DcPLAVqYTvS4fgDXTmQCq58Po48w6VYZ0VXprFS+pNU5UwypeIb9jEtNG82h0GROOrqhNjU0nzpxFfkjkJ7O7Tf3zxDuWJ3b6lVnqQQxct2dMmQgC7mXxzsdyX+ffnzh/BZHB+bWG4Oi9vLqhA6yfi0XkwWexeKS2w5QmPsVLNDgQL1D8UlnOQDrS5//f0gHz2cSTH6eGVXFO2GjcxOhvYy2+x1fUEEAf5C1QQt1VegCxql6jI0qb4inyAJnuobpr0OpQ0OrcQ+lsIybMqTOeZbdR2tum5tdF1kc1BU34BQ033etbKrQ9GlHgp129YOUItHl2C44eiDGyOs3f/C3VhEc2O6SQglVxsjpVIIuoz2+akWU=
+  app: skenne21-lawson-byob
+  
