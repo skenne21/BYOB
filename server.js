@@ -40,13 +40,10 @@ const checkAuth = (request, response, next) => {
 
 app.get('/api/v1/states', (request, response) => {
   const abbv = request.query.abbv
-  console.log(abbv)
-  if (abbv) {
+    if (abbv) {
     database('states').where('abbv', abbv).select()
       .then( states => {
-        console.log(states)
         if (states.length) {
-          console.log(states[0])
           response.status(200).json(states[0]);
         } else {
           response.status(422).json({
