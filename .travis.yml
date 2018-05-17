@@ -8,3 +8,5 @@ before_script:
 test:
  adapter: postgresql
  database: parks_test
+env:
+  - DB=DB_SECRETKEY=taco
