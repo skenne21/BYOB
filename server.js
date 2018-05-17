@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
+
 require('dotenv').config();
 
 const environment = process.env.NODE_ENV || 'development';
@@ -26,10 +27,11 @@ app.get('/', (request, response) => {
 
 const checkAuth = (request, response, next) => {
   const token = request.query.token;
+
   if (token) {
-    try{
+    try {
       const decoded = jwt.verify(token, app.get('secretKey'))
-    } catch(error) {
+    } catch (error) {
       throw error
     }
   } else {
@@ -38,9 +40,29 @@ const checkAuth = (request, response, next) => {
   next();
 }
 
-app.get('/api/v1/states', (request, response) => {
+const checkAdmin = (request, response, next) => {
+  const token = request.query.token;
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, app.get('secretKey'))
+      if (decoded.admin) {
+        next();
+      } else {
+        response.status(403).json({error: 'You must be authorized'})
+      }
+    } catch (error) {
+      throw error
+    }
+  } else {
+    return response.status(403).json({error: 'You must be authorized'})
+  }
+}
+
+app.get('/api/v1/states', checkAuth, (request, response) => {
   const abbv = request.query.abbv
-    if (abbv) {
+
+  if (abbv) {
     database('states').where('abbv', abbv).select()
       .then( states => {
         if (states.length) {
@@ -66,7 +88,7 @@ app.get('/api/v1/states', (request, response) => {
 
 });
 
-app.get('/api/v1/states/:id', (request, response) => {
+app.get('/api/v1/states/:id', checkAuth, (request, response) => {
   database('states').where('id', request.params.id).select()
     .then(state => {
       if (state.length) {
@@ -82,7 +104,7 @@ app.get('/api/v1/states/:id', (request, response) => {
     })
 });
 
-app.get('/api/v1/parks', (request, response) => {
+app.get('/api/v1/parks', checkAuth, (request, response) => {
   database('parks').select()
     .then(parks => {
       response.status(200).json(parks)
@@ -92,7 +114,7 @@ app.get('/api/v1/parks', (request, response) => {
     })
 });
 
-app.get('/api/v1/parks/:id', (request, response) => {
+app.get('/api/v1/parks/:id', checkAuth, (request, response) => {
   database('parks').where('id', request.params.id).select()
     .then(park => {
       if (park.length) {
@@ -108,7 +130,7 @@ app.get('/api/v1/parks/:id', (request, response) => {
     })
 });
 
-app.get('/api/v1/states/:id/parks', (request, response) => {
+app.get('/api/v1/states/:id/parks', checkAuth, (request, response) => {
   database('parks').where('state_id', request.params.id).select()
     .then(parks => {
       if (parks.length) {
@@ -125,16 +147,20 @@ app.get('/api/v1/states/:id/parks', (request, response) => {
 });
 
 app.post('/authenticate', (request, response) => {
-  const { email, appName } = request.body;
-  if (email && appName) {
+  const { email, appName, admin } = request.body;
+  if (email && appName && admin) {
+    const token = jwt.sign({email, appName, admin}, app.get('secretKey'), {expiresIn: '48h'});
+    response.status(201).json({token})
+  } else if (email && appName) {
     const token = jwt.sign({email, appName}, app.get('secretKey'), {expiresIn: '48h'});
-    response.status(201).json({token: token})
+
+    response.status(201).json({token})
   } else {
     response.status(404).json({message: 'Invalid Request'})
   }
 })
 
-app.post('/api/v1/states', checkAuth, (request, response) => {
+app.post('/api/v1/states', checkAdmin, (request, response) => {
   const state = request.body;
 
   for (let requiredParameter of ['name', 'abbv', 'capital', 'stateHood']) {
@@ -142,7 +168,7 @@ app.post('/api/v1/states', checkAuth, (request, response) => {
       return response
         .status(422)
         .send({
-            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.`
+          error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -156,7 +182,7 @@ app.post('/api/v1/states', checkAuth, (request, response) => {
     })
 });
 
-app.post('/api/v1/parks', checkAuth, (request, response) => {
+app.post('/api/v1/parks', checkAdmin, (request, response) => {
   const park = request.body;
 
   for (let requiredParameter of ['name', 'location', 'date_open', 'latLong', 'summary', 'state_id']) {
@@ -164,7 +190,7 @@ app.post('/api/v1/parks', checkAuth, (request, response) => {
       return response
         .status(422)
         .send({
-            error: `Expected format: { name: <String>, location: <String>, date_open: <String>, latLong: <String>, summary: <String>, state_id: <String> }. You're missing a "${requiredParameter}" property.`
+          error: `Expected format: { name: <String>, location: <String>, date_open: <String>, latLong: <String>, summary: <String>, state_id: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -179,7 +205,7 @@ app.post('/api/v1/parks', checkAuth, (request, response) => {
 
 })
 
-app.delete('/api/v1/states/:id', checkAuth, (request, response) => {
+app.delete('/api/v1/states/:id', checkAdmin, (request, response) => {
   database('states').where('id', request.params.id).del()
     .then( id => {
       if (id) {
@@ -195,7 +221,7 @@ app.delete('/api/v1/states/:id', checkAuth, (request, response) => {
     })
 })
 
-app.delete('/api/v1/parks/:id', checkAuth, (request, response) => {
+app.delete('/api/v1/parks/:id', checkAdmin, (request, response) => {
   database('parks').where('id', request.params.id).del()
     .then( id => {
       if (id) {
@@ -211,7 +237,7 @@ app.delete('/api/v1/parks/:id', checkAuth, (request, response) => {
     })
 })
 
-app.put('/api/v1/states/:id', checkAuth, (request, response) => {
+app.put('/api/v1/states/:id', checkAdmin, (request, response) => {
   const state = request.body;
 
   for (let requiredParameter of ['name', 'abbv', 'capital', 'stateHood']) {
@@ -219,7 +245,7 @@ app.put('/api/v1/states/:id', checkAuth, (request, response) => {
       return response
         .status(422)
         .send({
-            error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.`
+          error: `Expected format: { name: <String>, abbv: <String>, stateHood: <String>, capital: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }
@@ -239,7 +265,7 @@ app.put('/api/v1/states/:id', checkAuth, (request, response) => {
     })
 })
 
-app.put('/api/v1/parks/:id', checkAuth, (request, response) => {
+app.put('/api/v1/parks/:id', checkAdmin, (request, response) => {
   const park = request.body;
 
   for (let requiredParameter of ['name', 'date_open', 'latLong', 'location', 'summary']) {
@@ -247,7 +273,7 @@ app.put('/api/v1/parks/:id', checkAuth, (request, response) => {
       return response
         .status(422)
         .send({
-            error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a "${requiredParameter}" property.`
+          error: `Expected format: { name: <String>, date_open: <String>, latLong: <String>, location: <String>, summary: <String> }. You're missing a "${requiredParameter}" property.`
         });
     }
   }

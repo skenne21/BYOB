@@ -16,21 +16,23 @@ nightmareStateData
         abbv: results[1]
       }
     })
+
     return states
   })
   .end()
   .then(results => {
     console.log(results)
-    let states = JSON.stringify({states:results}, null, ' ')
+    let states = JSON.stringify({states: results}, null, ' ')
+
     fs.writeFile('./scraping-data/states-data.json', states, 'utf8', err => {
       if (err) {
         console.log('fs', err)
         throw new Error('nope')
       }
-  })
+    })
     // .catch( err => console.log('catch fs', err))
   })
-  .catch(err => console.log('errorTaco',err))
+  .catch(err => console.log('errorTaco', err))
 
 
 // nightmareStateData
