@@ -39,13 +39,34 @@ const checkAuth = (request, response, next) => {
 }
 
 app.get('/api/v1/states', (request, response) => {
-  database('states').select()
-    .then(states => {
-      response.status(200).json(states)
-    })
-    .catch(error => {
-      response.status(500).json({ error })
-    })
+  const abbv = request.query.abbv
+  console.log(abbv)
+  if (abbv) {
+    database('states').where('abbv', abbv).select()
+      .then( states => {
+        console.log(states)
+        if (states.length) {
+          console.log(states[0])
+          response.status(200).json(states[0]);
+        } else {
+          response.status(422).json({
+            error: `States not Found with abbv of ${abbv}`
+          })
+        }
+      })
+      .catch( error => {
+        response.status(500).json({ error })
+      })
+  } else {
+    database('states').select()
+      .then(states => {
+        response.status(200).json(states)
+      })
+      .catch(error => {
+        response.status(500).json({ error })
+      })
+  }
+
 });
 
 app.get('/api/v1/states/:id', (request, response) => {
