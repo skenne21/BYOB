@@ -1,10 +1,14 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
+
+app.set('secretKey', process.env.DB_SECRETKEY);
 
 app.set('port', process.env.PORT || 3000);
 
@@ -19,6 +23,20 @@ app.locals.title = 'parkFinder';
 app.get('/', (request, response) => {
 
 });
+
+const checkAuth = (request, response, next) => {
+  const token = request.query.token;
+  if (token) {
+    try{
+      const decoded = jwt.verify(token, app.get('secretKey'))
+    } catch(error) {
+      throw error
+    }
+  } else {
+    return response.status(403).json({error: 'You must be authorized'})
+  }
+  next();
+}
 
 app.get('/api/v1/states', (request, response) => {
   database('states').select()
@@ -88,7 +106,17 @@ app.get('/api/v1/states/:id/parks', (request, response) => {
     })
 });
 
-app.post('/api/v1/states', (request, response) => {
+app.post('/authenticate', (request, response) => {
+  const { email, appName } = request.body;
+  if (email && appName) {
+    const token = jwt.sign({email, appName}, app.get('secretKey'), {expiresIn: '48h'});
+    response.status(201).json({token: token})
+  } else {
+    response.status(404).json({message: 'Invalid Request'})
+  }
+})
+
+app.post('/api/v1/states', checkAuth, (request, response) => {
   const state = request.body;
 
   for (let requiredParameter of ['name', 'abbv', 'capital', 'stateHood']) {
@@ -110,7 +138,7 @@ app.post('/api/v1/states', (request, response) => {
     })
 });
 
-app.post('/api/v1/parks', (request, response) => {
+app.post('/api/v1/parks', checkAuth, (request, response) => {
   const park = request.body;
 
   for (let requiredParameter of ['name', 'location', 'date_open', 'latLong', 'summary', 'state_id']) {
@@ -133,7 +161,7 @@ app.post('/api/v1/parks', (request, response) => {
 
 })
 
-app.delete('/api/v1/states/:id', (request, response) => {
+app.delete('/api/v1/states/:id', checkAuth, (request, response) => {
   database('states').where('id', request.params.id).del()
     .then( id => {
       if (id) {
@@ -149,7 +177,7 @@ app.delete('/api/v1/states/:id', (request, response) => {
     })
 })
 
-app.delete('/api/v1/parks/:id', (request, response) => {
+app.delete('/api/v1/parks/:id', checkAuth, (request, response) => {
   database('parks').where('id', request.params.id).del()
     .then( id => {
       if (id) {
@@ -165,7 +193,7 @@ app.delete('/api/v1/parks/:id', (request, response) => {
     })
 })
 
-app.put('/api/v1/states/:id', (request, response) => {
+app.put('/api/v1/states/:id', checkAuth, (request, response) => {
   const state = request.body;
 
   for (let requiredParameter of ['name', 'abbv', 'capital', 'stateHood']) {
@@ -193,7 +221,7 @@ app.put('/api/v1/states/:id', (request, response) => {
     })
 })
 
-app.put('/api/v1/parks/:id', (request, response) => {
+app.put('/api/v1/parks/:id', checkAuth, (request, response) => {
   const park = request.body;
 
   for (let requiredParameter of ['name', 'date_open', 'latLong', 'location', 'summary']) {

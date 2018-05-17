@@ -34,7 +34,9 @@ describe('client-routes', () => {
 });
 
 describe('API-routes', () => {
+  let token;
   beforeEach((done) => {
+    token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InN0ZXZlbiIsImFwcE5hbWUiOiJzYWJyaW5hIiwiaWF0IjoxNTI2NTEzNzg4LCJleHAiOjE1MjY2ODY1ODh9.eakb1OdlvvvIkfL4nGJ8OfvAgmhUl1tlwBAn98a0jak'
     database.migrate.rollback()
       .then(() => {
         database.migrate.latest()
@@ -223,7 +225,7 @@ describe('API-routes', () => {
     describe('POST /api/v1/states', () => {
       it('should post a new new state to the database', () => {
         return chai.request(server)
-          .post('/api/v1/states')
+          .post(`/api/v1/states?token=${token}`)
           .send({
             name: 'bananas',
             abbv: 'BA',
@@ -242,7 +244,7 @@ describe('API-routes', () => {
       })
     it('should send 422 if missing req params', () => {
       return chai.request(server)
-        .post('/api/v1/states')
+        .post(`/api/v1/states?token=${token}`)
         .send({
           name: 'bananas',
           abbv: 'BA',
@@ -262,7 +264,7 @@ describe('API-routes', () => {
   describe('POST /api/v1/parks', () => {
     it('should post a new park to the database', () => {
       return chai.request(server)
-        .post('/api/v1/parks')
+        .post(`/api/v1/parks?token=${token}`)
         .send({
           name: 'tacotown',
           location: 'BA',
@@ -284,7 +286,7 @@ describe('API-routes', () => {
 
   it('should send 422 if missing req params', () => {
     return chai.request(server)
-      .post('/api/v1/parks')
+      .post(`/api/v1/parks?token=${token}`)
       .send({
         name: 'tacotown',
         location: 'BA',
@@ -306,7 +308,7 @@ describe('API-routes', () => {
   describe('DELETE /api/v1/states/:id', () => {
     it('should delete a record with a spec id', () => {
       return chai.request(server)
-        .delete('/api/v1/states/1')
+        .delete(`/api/v1/states/1?token=${token}`)
         .then(response => {
           response.should.have.status(204);
         })
@@ -317,7 +319,7 @@ describe('API-routes', () => {
 
     it('should send a status of 404 if the id does not match', () => {
       return chai.request(server)
-        .delete('/api/v1/states/2022')
+        .delete(`/api/v1/states/2022?token=${token}`)
         .then(response => {
           response.should.have.status(404)
         })
@@ -330,7 +332,7 @@ describe('API-routes', () => {
   describe('DELETE /api/v1/parks/:id', () => {
     it('should delete a record with a spec id', () => {
       return chai.request(server)
-        .delete('/api/v1/parks/1')
+        .delete(`/api/v1/parks/1?token=${token}`)
         .then(response => {
           response.should.have.status(204);
         })
@@ -341,7 +343,7 @@ describe('API-routes', () => {
 
     it('should send a status of 404 if the id does not match', () => {
       return chai.request(server)
-        .delete('/api/v1/parks/2022')
+        .delete(`/api/v1/parks/2022?token=${token}`)
         .then(response => {
           response.should.have.status(404)
         })
@@ -354,7 +356,7 @@ describe('API-routes', () => {
   describe('PUT /api/v1/states/:id', () => {
     it('should modify a single state by id', () => {
       return chai.request(server)
-        .put('/api/v1/states/1')
+        .put(`/api/v1/states/1?token=${token}`)
         .send({
           name: 'frankiebeans',
           abbv: 'PA',
@@ -374,7 +376,7 @@ describe('API-routes', () => {
 
     it('should send 422 if missing req params', () => {
       return chai.request(server)
-        .put('/api/v1/states/1')
+        .put(`/api/v1/states/1?token=${token}`)
         .send({
           name: 'frankiebeans',
           abbv: 'PA',
@@ -394,7 +396,7 @@ describe('API-routes', () => {
   describe('PUT /api/v1/parks/:id', () => {
     it('should replace a single park by id', () => {
       return chai.request(server)
-      .put('/api/v1/parks/1')
+      .put(`/api/v1/parks/1?token=${token}`)
       .send({
         name: 'tacotown',
         location: 'BA',
@@ -415,7 +417,7 @@ describe('API-routes', () => {
 
     it('should send 422 if missing req params', () => {
       return chai.request(server)
-        .put('/api/v1/parks/1')
+        .put(`/api/v1/parks/1?token=${token}`)
         .send({
           name: 'tacotown',
           location: 'BA',
